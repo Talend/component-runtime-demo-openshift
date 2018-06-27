@@ -11,16 +11,7 @@ if [ "$(ls -A /tmp/artifacts/ 2>/dev/null)" ]; then
   mkdir -p /tmp/m2 && cp -Rf /tmp/artifacts/* /tmp/m2
 fi
 
-mvn --version
-
-mvn clean package -Dmaven.repo.local=/tmp/artifacts/m2 -s /tmp/artifacts/configuration/settings.xml -e \
-    -Popenshift -DskipTests --batch-mode -Djava.net.preferIPv4Stack=true \
-    -Dcom.redhat.xpaas.repo.redhatga -Dfabric8.skip=true package
-ERR=$?
-if [ $ERR -ne 0 ]; then
-  echo "Aborting due to error code $ERR from Maven build"
-  exit $ERR
-fi
+/usr/local/s2i/assemble
 
 cd target
 unzip component-server.zip
