@@ -5,7 +5,6 @@
 #
 
 HOME=/opt/app-root/src
-DEPLOY_DIR=/opt/openshift
 
 if [ "$(ls -A /tmp/artifacts/ 2>/dev/null)" ]; then
   mkdir -p /tmp/m2 && cp -Rf /tmp/artifacts/* /tmp/m2
@@ -17,11 +16,11 @@ source /usr/local/s2i/s2i-setup
 cd $S2I_SOURCE_DIR/target
 
 unzip component-server.zip
-mv component-server-distribution/* $DEPLOY_DIR
-mkdir -p $DEPLOY_DIR/.m2/repository/org/talend/demo/1.0.0
-cp target/component-runtime-demo-openshift-*.jar $DEPLOY_DIR/.m2/repository/org/talend/demo/1.0.0/demo-1.0.0.jar
+mv component-server-distribution/* $DEPLOYMENTS_DIR
+mkdir -p $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0
+cp target/component-runtime-demo-openshift-*.jar $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0/demo-1.0.0.jar
 
-cat > $DEPLOY_DIR/bin/setenv.sh << EOF
+cat > $DEPLOYMENTS_DIR/bin/setenv.sh << EOF
 #! /bin/sh
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.maven.repository=$MEECROWAVE_BASE/.m2"
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.component.coordinates=org.talend:demo:1.0.0"
