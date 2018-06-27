@@ -17,4 +17,5 @@ unzip component-server.zip
 mv component-server-distribution/* $DEPLOYMENTS_DIR
 cp ../src/main/meecrowave/setenv.sh $DEPLOYMENTS_DIR/bin
 mkdir -p $DEPLOYMENTS_DIR/logs $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0
+chmod -R ogu+rw $DEPLOYMENTS_DIR/logs
 cp component-runtime-demo-openshift-*.jar $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0/demo-1.0.0.jar
