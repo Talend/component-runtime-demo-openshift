@@ -13,7 +13,7 @@ fi
 
 /usr/local/s2i/assemble
 
-source /usr/local/s2i/s2i-setup
+. /usr/local/s2i/s2i-setup
 
 cd $S2I_SOURCE_DIR/target
 unzip component-server.zip
