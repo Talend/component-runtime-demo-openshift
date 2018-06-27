@@ -25,3 +25,6 @@ export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.maven.reposit
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.component.coordinates=org.talend:demo:1.0.0"
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.documentation.active=true"
 EOF
+
+mvn clean
+find /tmp/artifacts/m2 -name ''*SNAPSHOT' | xargs rm -Rf
