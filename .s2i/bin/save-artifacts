@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+#
+#   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+find /tmp/artifacts/m2 -name *SNAPSHOT | xargs rm -Rf
+tar cf - /tmp/artifacts/m2

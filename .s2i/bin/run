@@ -4,5 +4,4 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-cd /opt/openshift
-exec ./bin/meecrowave.sh run
+cd /opt/openshift && ./bin/meecrowave.sh run
