@@ -5,24 +5,16 @@
 #   https://github.com/jboss-openshift/cct_module/tree/master/os-java-s2i/added/s2i
 #
 
-HOME=/opt/app-root/src
-
-if [ "$(ls -A /tmp/artifacts/ 2>/dev/null)" ]; then
-  mkdir -p /tmp/m2 && cp -Rf /tmp/artifacts/* /tmp/m2
-fi
-
+# default build
 /usr/local/s2i/assemble
 
+# load back mvn env setup
 . /usr/local/s2i/s2i-setup
 
+# setup the server dir
 cd $S2I_SOURCE_DIR/target
 unzip component-server.zip
 mv component-server-distribution/* $DEPLOYMENTS_DIR
 cp ../src/main/meecrowave/setenv.sh $DEPLOYMENTS_DIR/bin
 mkdir -p $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0
 cp component-runtime-demo-openshift-*.jar $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0/demo-1.0.0.jar
-
-
-setup_maven
-cd $S2I_SOURCE_DIR && mvn ${maven_env_args} clean
-find $S2I_ARTIFACTS_DIR/m2 -name ''*SNAPSHOT' | xargs rm -Rf
