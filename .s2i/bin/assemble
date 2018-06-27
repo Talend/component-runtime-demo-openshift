@@ -13,7 +13,9 @@ fi
 
 /usr/local/s2i/assemble
 
-cd target
+source /usr/local/s2i/s2i-setup
+cd $S2I_SOURCE_DIR/target
+
 unzip component-server.zip
 mv component-server-distribution/* $DEPLOY_DIR
 mkdir -p $DEPLOY_DIR/.m2/repository/org/talend/demo/1.0.0
