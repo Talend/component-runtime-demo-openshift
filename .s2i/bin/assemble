@@ -22,7 +22,7 @@ mkdir -p $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0
 cp component-runtime-demo-openshift-*.jar $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0/demo-1.0.0.jar
 
 
-cat > $DEPLOYMENTS_DIR/bin/setenv.sh << EOF
+cat <<'EOF' > $DEPLOYMENTS_DIR/bin/setenv.sh
 #! /bin/sh
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.maven.repository=$MEECROWAVE_BASE/.m2"
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.component.coordinates=org.talend:demo:1.0.0"
@@ -30,4 +30,4 @@ export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.documentation
 EOF
 
 cd $S2I_SOURCE_DIR && mvn clean
-find ${S2I_ARTIFACTS_DIR}/m2 -name ''*SNAPSHOT' | xargs rm -Rf
+find $S2I_ARTIFACTS_DIR/m2 -name ''*SNAPSHOT' | xargs rm -Rf
