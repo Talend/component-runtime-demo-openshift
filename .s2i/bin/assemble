@@ -20,7 +20,7 @@ unzip component-server.zip
 mv component-server-distribution/* $DEPLOYMENTS_DIR
 mkdir -p $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0
 cp component-runtime-demo-openshift-*.jar $DEPLOYMENTS_DIR/.m2/repository/org/talend/demo/1.0.0/demo-1.0.0.jar
-cd -
+
 
 cat > $DEPLOYMENTS_DIR/bin/setenv.sh << EOF
 #! /bin/sh
@@ -29,5 +29,5 @@ export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.component.coo
 export MEECROWAVE_OPTS="$MEECROWAVE_OPTS -Dtalend.component.server.documentation.active=true"
 EOF
 
-mvn clean
-find /tmp/artifacts/m2 -name ''*SNAPSHOT' | xargs rm -Rf
+cd $S2I_SOURCE_DIR && mvn clean
+find ${S2I_ARTIFACTS_DIR}/m2 -name ''*SNAPSHOT' | xargs rm -Rf
